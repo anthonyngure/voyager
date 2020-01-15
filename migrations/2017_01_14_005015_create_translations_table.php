@@ -16,14 +16,14 @@ class CreateTranslationsTable extends Migration
         Schema::create('translations', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('table_name');
-            $table->string('column_name');
-            $table->integer('foreign_key')->unsigned();
-            $table->string('locale');
+            $table->string('table_name')->unique();
+            $table->string('column_name')->unique();
+            $table->integer('foreign_key')->unique()->unsigned();
+            $table->string('locale')->unique();
 
             $table->text('value');
 
-            $table->unique(['table_name', 'column_name', 'foreign_key', 'locale']);
+            //$table->unique(['table_name', 'column_name', 'foreign_key', 'locale']);
 
             $table->timestamps();
         });
